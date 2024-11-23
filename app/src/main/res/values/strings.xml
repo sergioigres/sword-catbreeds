@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SwordCatBreedsApplication</string>
+    <string name="title_activity_breed_screen">BreedScreen</string>
 </resources>
