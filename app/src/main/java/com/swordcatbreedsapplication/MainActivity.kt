@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import com.swordcatbreedsapplication.data.CatBreed
-import com.swordcatbreedsapplication.feature.breeds.BreedsViewModel
 import com.swordcatbreedsapplication.ui.theme.CatBreedsTheme
 
 class MainActivity : ComponentActivity() {

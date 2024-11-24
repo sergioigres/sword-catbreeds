@@ -77,5 +77,13 @@ dependencies {
     implementation(libs.androidx.navigation.ui)
     //
     implementation(libs.androidx.constraintlayout.compose)
+    // Retrofit
+    implementation(libs.gson)
+    implementation(libs.okhttp3.logging.interceptor)
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.retrofit2)
+    // Paging
+    implementation(libs.androidx.paging.compose)
+
 
 }

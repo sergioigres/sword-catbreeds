@@ -1,6 +1,7 @@
 package com.swordcatbreedsapplication.feature.breeds
 
 import android.content.res.Configuration
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,17 +21,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.swordcatbreedsapplication.api.CatBreedJson
+import com.swordcatbreedsapplication.api.ImageJson
 import com.swordcatbreedsapplication.data.CatBreed
 import com.swordcatbreedsapplication.ui.theme.CatBreedsTheme
 
 @Composable
-fun CatBreedCard(cat: CatBreed) {
+fun CatBreedCard(cat: CatBreedJson) {
     Row {
         // Cat Details
         Column(modifier = Modifier.padding(all = 8.dp)) {
             // Cat Image
+            val image = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
             AsyncImage(
-                model = cat.image,
+                model = image,//cat.Image.url,
                 contentDescription = "Image of ${cat.name}, a ${cat.origin} cat",
                 modifier = Modifier
                     .size(64.dp)
@@ -72,10 +76,10 @@ fun CatBreedCard(cat: CatBreed) {
 }
 
 @Composable
-fun ListOfCats(cats: List<CatBreed>) {
+fun ListOfCats(cats: List<CatBreedJson>) {
     LazyColumn {
-        items(cats) { message ->
-            CatBreedCard(message)
+        items(cats) { cat ->
+            CatBreedCard(cat)
         }
     }
 }
@@ -96,18 +100,26 @@ fun PreviewConversation() {
     }
 }
 
+/*
 @Preview(showBackground = true)
 @Composable
 fun CatCardPreview() {
     CatBreedsTheme {
         CatBreedCard(
-            CatBreed(
-                "https://media.istockphoto.com/id/1443562748/photo/cute-ginger-cat.jpg?s=612x612&w=0&k=20&c=vvM97wWz-hMj7DLzfpYRmY2VswTqcFEKkC437hxm3Cg=",
+            CatBreedJson(
+                "abys",
                 "Abyssinian",
                 "Egypt",
                 "description",
-                "temperament"
+                "temperament",
+                ImageJson(
+                    "0XYvRd7oD",
+                    1240,
+                    1240,
+                    "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
+                )
             )
         )
     }
 }
+ */
