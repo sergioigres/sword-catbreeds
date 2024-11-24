@@ -8,8 +8,19 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2024.04.01"
+androidxNavigation = "2.8.4"
+androidxConstraintlayoutCompose = "1.1.0-alpha13"
+coil = "3.0.3"
 
 [libraries]
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigation" }
+androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment", version.ref = "androidxNavigation" }
+androidx-navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "androidxNavigation" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
+
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidxConstraintlayoutCompose" }
+
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

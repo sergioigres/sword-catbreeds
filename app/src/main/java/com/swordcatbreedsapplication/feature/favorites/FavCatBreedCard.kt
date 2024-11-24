@@ -1,4 +1,4 @@
-package com.swordcatbreedsapplication.ui.theme
+package com.swordcatbreedsapplication.feature.favorites
 
 import android.content.res.Configuration
 import androidx.compose.foundation.border
@@ -21,9 +21,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.swordcatbreedsapplication.data.CatBreed
+import com.swordcatbreedsapplication.ui.theme.CatBreedsTheme
 
 @Composable
-fun uiCatCard(cat: CatBreed) {
+fun FavCatBreedCard(cat: CatBreed) {
     Row {
         // Cat Details
         Column(modifier = Modifier.padding(all = 8.dp)) {
@@ -74,7 +75,7 @@ fun uiCatCard(cat: CatBreed) {
 fun ListOfCats(cats: List<CatBreed>) {
     LazyColumn {
         items(cats) { message ->
-            uiCatCard(message)
+            FavCatBreedCard(message)
         }
     }
 }
@@ -90,7 +91,7 @@ fun ListOfCats(cats: List<CatBreed>) {
 @Preview
 @Composable
 fun PreviewConversation() {
-    SwordCatBreedsApplicationTheme {
+    CatBreedsTheme {
         ListOfCats(DummyLocalData.listOfCatBreeds)
     }
 }
@@ -98,8 +99,8 @@ fun PreviewConversation() {
 @Preview(showBackground = true)
 @Composable
 fun CatCardPreview() {
-    SwordCatBreedsApplicationTheme {
-        uiCatCard(
+    CatBreedsTheme {
+        FavCatBreedCard(
             CatBreed(
                 "https://media.istockphoto.com/id/1443562748/photo/cute-ginger-cat.jpg?s=612x612&w=0&k=20&c=vvM97wWz-hMj7DLzfpYRmY2VswTqcFEKkC437hxm3Cg=",
                 "Abyssinian",

@@ -68,13 +68,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation("io.coil-kt.coil3:coil-compose:3.0.3")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.3")
-
-    val nav_version = "2.8.4"
-    implementation("androidx.navigation:navigation-compose:$nav_version")
-    implementation("androidx.navigation:navigation-fragment:$nav_version")
-    implementation("androidx.navigation:navigation-ui:$nav_version")
-
+    // Coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
+    //
+    implementation(libs.androidx.constraintlayout.compose)
 
 }

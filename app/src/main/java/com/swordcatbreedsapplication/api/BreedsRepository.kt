@@ -10,6 +10,11 @@ public class BreedsRepository() {
         fun getCatBreeds(): List<CatBreed> {
             return DummyLocalData.listOfCatBreeds
         }
+
+        fun getCatBreed(id: Int): CatBreed {
+            return DummyLocalData.listOfCatBreeds.get(id)
+        }
+
     }
 }
 

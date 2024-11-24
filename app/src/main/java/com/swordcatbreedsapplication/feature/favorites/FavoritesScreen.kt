@@ -1,4 +1,4 @@
-package com.swordcatbreedsapplication.feature.breeds
+package com.swordcatbreedsapplication.feature.favorites
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,13 +15,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.swordcatbreedsapplication.feature.breed.ui.theme.SwordCatBreedsApplicationTheme
-import com.swordcatbreedsapplication.ui.theme.uiCatCard
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun FavouritesScreen(navController: NavHostController) {
 
-    SwordCatBreedsApplicationTheme {
+//    CatBreedsTheme {
         Scaffold(
             //topBar = { setTopBar() },
             //bottomBar = { setBottomBar() },
@@ -45,35 +43,30 @@ fun HomeScreen(navController: NavHostController) {
         }
 
 
-    }
-
-
-    // Fetch and list Items
-    //CatListScreen(navController)
-
+//    }
 }
 
 
 @Composable
 fun CatListScreen(navController: NavHostController, modifier: Modifier) {
-
-
     // Observe cats StateFlow
-    val listOfCatBreeds by BreedsViewModel.items.collectAsState()
+    val listOfCatBreeds by FavoritesViewModel.items.collectAsState()
+
+    /*
     // Use LazyColumn to display the list of cats
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp)
     ) {
         items(listOfCatBreeds) { item ->
-            uiCatCard(item)//, Modifier.fillMaxSize())
-            //CatListItem(item, onCatClick)
+            FavCatBreedCard(item)
             Divider() // Optional divider between items
         }
     }
+     */
 
     // TEST
-    Button(onClick = { navController.navigate("details") }) {
-        Text("Go to Details")
+    Button(onClick = { navController.navigate("home") }) {
+        Text("Go to home")
     }
 }
