@@ -1,6 +1,6 @@
 package com.swordcatbreedsapplication.data
 
-data class CatBreed(
+data class DummyCatBreed(
     val image: String,
     val name: String,
     val origin: String,

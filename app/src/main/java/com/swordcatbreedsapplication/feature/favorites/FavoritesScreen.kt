@@ -28,7 +28,7 @@ fun FavouritesScreen(navController: NavHostController) {
             //floatingActionButton = { setFloatingActionButton() },
             modifier = Modifier.fillMaxSize()
         ) { innerPadding ->
-            CatListScreen(
+            FavoritesScreen(
                 navController, modifier = Modifier.padding(innerPadding)
 
                 /*
@@ -50,9 +50,9 @@ fun FavouritesScreen(navController: NavHostController) {
 
 
 @Composable
-fun CatListScreen(navController: NavHostController, modifier: Modifier) {
+fun FavoritesScreen(navController: NavHostController, modifier: Modifier) {
     // Observe cats StateFlow
-    val listOfCatBreeds by FavoritesViewModel.items.collectAsState()
+    //val listOfCatBreeds by FavoritesViewModel.items.collectAsState()
 
     /*
     // Use LazyColumn to display the list of cats

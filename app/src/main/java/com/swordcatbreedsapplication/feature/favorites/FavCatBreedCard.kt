@@ -20,11 +20,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.swordcatbreedsapplication.data.CatBreed
+import com.swordcatbreedsapplication.data.DummyCatBreed
 import com.swordcatbreedsapplication.ui.theme.CatBreedsTheme
 
 @Composable
-fun FavCatBreedCard(cat: CatBreed) {
+fun FavCatBreedCard(cat: DummyCatBreed) {
     Row {
         // Cat Details
         Column(modifier = Modifier.padding(all = 8.dp)) {
@@ -72,7 +72,7 @@ fun FavCatBreedCard(cat: CatBreed) {
 }
 
 @Composable
-fun ListOfCats(cats: List<CatBreed>) {
+fun ListOfCats(cats: List<DummyCatBreed>) {
     LazyColumn {
         items(cats) { message ->
             FavCatBreedCard(message)
@@ -101,7 +101,7 @@ fun PreviewConversation() {
 fun CatCardPreview() {
     CatBreedsTheme {
         FavCatBreedCard(
-            CatBreed(
+            DummyCatBreed(
                 "https://media.istockphoto.com/id/1443562748/photo/cute-ginger-cat.jpg?s=612x612&w=0&k=20&c=vvM97wWz-hMj7DLzfpYRmY2VswTqcFEKkC437hxm3Cg=",
                 "Abyssinian",
                 "Egypt",

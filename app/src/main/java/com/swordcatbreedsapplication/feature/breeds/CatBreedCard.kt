@@ -1,11 +1,8 @@
 package com.swordcatbreedsapplication.feature.breeds
 
 import android.content.res.Configuration
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -21,16 +18,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.swordcatbreedsapplication.api.CatBreedJson
+import com.swordcatbreedsapplication.api.model.CatBreed
 import com.swordcatbreedsapplication.ui.theme.CatBreedsTheme
 
 @Composable
-fun CatBreedCard(cat: CatBreedJson, onClick: () -> Unit) {
+fun CatBreedCard(cat: CatBreed, onClick: () -> Unit) {
     // Create card
     Card(
         onClick = onClick,
@@ -46,9 +42,10 @@ fun CatBreedCard(cat: CatBreedJson, onClick: () -> Unit) {
                 .fillMaxSize(),
         ) {
             // Cat Image
-            val image = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
+
             AsyncImage(
-                model = image,//cat.Image.url,
+                // cat.Image?.url
+                model = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg",
                 contentDescription = "Image of ${cat.name}, a ${cat.origin} cat",
                 modifier = Modifier
                     .size(92.dp)
@@ -96,7 +93,7 @@ fun CatBreedCard(cat: CatBreedJson, onClick: () -> Unit) {
 }
 
 @Composable
-fun ListOfCats(cats: List<CatBreedJson>, onClick: () -> Unit) {
+fun ListOfCats(cats: List<CatBreed>, onClick: () -> Unit) {
     LazyColumn {
         items(cats) { cat ->
             CatBreedCard(cat, onClick)

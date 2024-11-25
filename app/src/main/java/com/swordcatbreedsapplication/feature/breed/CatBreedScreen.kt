@@ -1,16 +1,13 @@
 package com.swordcatbreedsapplication.feature.breed
 
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -22,38 +19,46 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInWindow
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.pluralStringResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
-import com.swordcatbreedsapplication.R
-import com.swordcatbreedsapplication.data.CatBreed
-import kotlin.coroutines.coroutineContext
+import com.swordcatbreedsapplication.api.CatApi
+import com.swordcatbreedsapplication.api.model.CatBreed
+import com.swordcatbreedsapplication.data.DummyCatBreed
+import com.swordcatbreedsapplication.data.CatRepository
+
+
+// Create an instance of CatApi
+val catApi = CatApi.create()
+
+// Create an instance of CatRepository
+val catRepository = CatRepository(catApi)
+
+// Create an instance of CatBreedsViewModel
+val catBreedViewModel = CatBreedViewModel(catRepository)
+
+const val SCREE_NAME = "Cat Breed"
 
 @Composable
 fun BreedScreen(itemId: String, navController: NavHostController) {
 
     val scrollState = rememberScrollState()
 
-    // Observe cat StateFlow
-    val catBreed by CatBreedViewModel.items.collectAsState()
-
+    // Observe cats StateFlow
+    val catBreed by catBreedViewModel.catBreed.collectAsState()
+    // Fetch cat breeds when the screen is first displayed
+    LaunchedEffect(Unit) {
+        catBreedViewModel.fetchCatBreed("abys")
+    }
+    //
     CatBreedDetails(
         scrollState, catBreed, isFavorite = false
     )
@@ -65,8 +70,12 @@ fun BreedScreen(itemId: String, navController: NavHostController) {
 }
 
 @Composable
-private fun CatBreedDetails(scrollState: ScrollState, catBreed: CatBreed, isFavorite: Boolean) {
-
+private fun CatBreedDetails(
+    scrollState: ScrollState,
+    catBreed: CatBreed,
+    isFavorite: Boolean
+) {
+    //
     Box(Modifier.fillMaxSize()) {
         Column(Modifier.verticalScroll(scrollState)) {
             // Image
@@ -82,15 +91,16 @@ private fun CatBreedDetails(scrollState: ScrollState, catBreed: CatBreed, isFavo
 
 @Composable
 private fun CatBreedImage(cat: CatBreed) {
-    // Cat Image
+    //
     AsyncImage(
-        model = cat.image,
+        // cat.Image?.url
+        model = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg",
         contentDescription = "Image of ${cat.name}, a ${cat.origin} cat",
         modifier = Modifier
             .fillMaxSize()
-            .clip(CircleShape)
+            //.clip(CircleShape)
             .border(1.5.dp, MaterialTheme.colorScheme.primary)
-            //.align(Alignment.CenterHorizontally)
+        //.align(Alignment.CenterHorizontally)
     )
 }
 

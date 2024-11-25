@@ -1,7 +1,7 @@
 package com.swordcatbreedsapplication.api
 
 import DummyLocalData
-import com.swordcatbreedsapplication.data.CatBreed
+import com.swordcatbreedsapplication.api.model.CatBreed
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,13 +13,13 @@ interface CatApi {
 
     // GET /breeds?limit=20&page=0
     @GET("breeds")
-    suspend fun getCatBreeds(): List<CatBreedJson>
+    suspend fun getCatBreeds(): List<CatBreed>
 
     // GET /breeds/:breed_id
-    @GET("/breeds/{breed_id}")
-    suspend fun getCatBreedId(
+    @GET("breeds/{breed_id}")
+    suspend fun getCatBreed(
         @Path("breed_id") breedId: String
-    ): CatBreedJson
+    ): CatBreed
 
     companion object {
 
@@ -50,14 +50,18 @@ interface CatApi {
                 .create(CatApi::class.java)
         }
 
+
+        /*
         // Dummy
-        fun getCatBreeds(): List<CatBreed> {
+        fun getCatBreeds(): List<DummyCatBreed> {
             return DummyLocalData.listOfCatBreeds
         }
 
-        fun getCatBreed(id: Int): CatBreed {
+        fun getCatBreed(id: Int): DummyCatBreed {
             return DummyLocalData.listOfCatBreeds.get(id)
         }
+
+         */
 
     }
 }
