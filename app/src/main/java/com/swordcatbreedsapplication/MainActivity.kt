@@ -57,21 +57,7 @@ fun setTopBar(): @Composable () -> Unit {
     }
 }
 
-@Composable
-fun setBottomBar(): @Composable () -> Unit {
-    return {
-        BottomAppBar(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.primary,
-        ) {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                text = "Bottom app bar",
-            )
-        }
-    }
-}
+
 
 @Composable
 fun setFloatingActionButton() {
