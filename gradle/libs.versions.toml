@@ -15,8 +15,11 @@ gson = "2.10.1"
 okhttpLogging = "4.12.0"
 retrofit = "2.11.0"
 pagingCompose = "3.3.0-rc01"
+room = "2.5.2"
 
 [libraries]
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidxNavigation" }
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment", version.ref = "androidxNavigation" }
 androidx-navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "androidxNavigation" }

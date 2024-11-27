@@ -1,7 +1,7 @@
 package com.swordcatbreedsapplication.data
 
-import com.swordcatbreedsapplication.api.model.CatBreed
-import com.swordcatbreedsapplication.api.CatApi
+import com.swordcatbreedsapplication.data.api.models.CatBreed
+import com.swordcatbreedsapplication.data.api.CatApi
 
 class CatRepository(private val catBreedsApi: CatApi) {
 

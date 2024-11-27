@@ -4,22 +4,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
-import androidx.compose.runtime.Composable
-import com.swordcatbreedsapplication.data.DummyCatBreed
+import androidx.room.Room
+import com.swordcatbreedsapplication.data.FavoriteRepository
+import com.swordcatbreedsapplication.data.local.CatBreedDatabase
+import com.swordcatbreedsapplication.feature.favorites.FavoritesViewModel
 import com.swordcatbreedsapplication.ui.theme.CatBreedsTheme
+import com.swordcatbreedsapplication.data.local.FavouriteDao
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Initialize Room database
+        //CatBreedDatabase.getDatabase(applicationContext)
         // Displaying edge-to-edge
         enableEdgeToEdge()
         // Set content of Main Activity
@@ -30,34 +26,5 @@ class MainActivity : ComponentActivity() {
                 MainAppNavigation()
             }
         }
-    }
-}
-
-
-@Composable
-fun CatListItem(i: Int, click: (DummyCatBreed) -> Unit) {
-    TODO("Not yet implemented")
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun setTopBar(): @Composable () -> Unit {
-    return {
-        TopAppBar(colors = topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
-        ), title = {
-            Text("Top app bar")
-        })
-    }
-}
-
-
-
-@Composable
-fun setFloatingActionButton() {
-    return FloatingActionButton(onClick = { /* do something */ }) {
-        Icon(Icons.Filled.Add, "Localized description")
     }
 }

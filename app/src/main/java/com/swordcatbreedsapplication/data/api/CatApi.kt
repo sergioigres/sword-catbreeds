@@ -1,7 +1,6 @@
-package com.swordcatbreedsapplication.api
+package com.swordcatbreedsapplication.data.api
 
-import DummyLocalData
-import com.swordcatbreedsapplication.api.model.CatBreed
+import com.swordcatbreedsapplication.data.api.models.CatBreed
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -37,7 +36,10 @@ interface CatApi {
                 })
                 // Add API Key Header
                 .addInterceptor {
-                    val request = it.request().newBuilder().addHeader("x-api-key", API_KEY).build()
+                    val request = it.request().newBuilder()
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("x-api-key", API_KEY)
+                        .build()
                     it.proceed(request)
                 }
                 .build()

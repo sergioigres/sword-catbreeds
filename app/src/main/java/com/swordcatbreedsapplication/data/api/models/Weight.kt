@@ -1,4 +1,4 @@
-package com.swordcatbreedsapplication.api.model
+package com.swordcatbreedsapplication.data.api.models
 
 data class Weight(
     val imperial: String,

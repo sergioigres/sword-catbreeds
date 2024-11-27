@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    //kotlin("kapt")
 }
 
 android {
@@ -84,6 +85,13 @@ dependencies {
     implementation(libs.retrofit2)
     // Paging
     implementation(libs.androidx.paging.compose)
-
+    // Room 2.6.1
+    implementation(libs.androidx.room)
+    implementation (libs.androidx.room.ktx)
+    //annotationProcessor ("androidx.room:room-compiler:2.5.2")
+    //kapt ("androidx.room:room-compiler:2.5.2")
+    // Hilt
+    //implementation("com.google.dagger:hilt-android:2.48")
+    //kapt("com.google.dagger:hilt-android-compiler:2.48")
 
 }

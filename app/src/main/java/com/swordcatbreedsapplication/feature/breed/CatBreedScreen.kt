@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -24,16 +23,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
-import com.swordcatbreedsapplication.api.CatApi
-import com.swordcatbreedsapplication.api.model.CatBreed
-import com.swordcatbreedsapplication.data.DummyCatBreed
+import com.swordcatbreedsapplication.data.api.CatApi
+import com.swordcatbreedsapplication.data.api.models.CatBreed
 import com.swordcatbreedsapplication.data.CatRepository
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 
 
 // Create an instance of CatApi
@@ -45,12 +45,24 @@ val catRepository = CatRepository(catApi)
 // Create an instance of CatBreedsViewModel
 val catBreedViewModel = CatBreedViewModel(catRepository)
 
+
 const val SCREE_NAME = "Cat Breed"
 
 @Composable
 fun BreedScreen(itemId: String, navController: NavHostController) {
 
     val scrollState = rememberScrollState()
+
+
+    /*
+    // TODO - Add to favourites using dummy data
+    val isFavorite = favoritesViewModel.isFavorite(itemId)
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            false
+        )
+     */
 
     // Observe cats StateFlow
     val catBreed by catBreedViewModel.catBreed.collectAsState()
@@ -62,11 +74,6 @@ fun BreedScreen(itemId: String, navController: NavHostController) {
     CatBreedDetails(
         scrollState, catBreed, isFavorite = false
     )
-
-    Button(onClick = { navController.navigate("home") }) {
-        Text("Go to Home")
-    }
-
 }
 
 @Composable
@@ -111,7 +118,21 @@ private fun CatBreedFavoriteButton(isFavorite: Boolean) {
     FloatingActionButton(
         onClick = {
             Toast.makeText(context, "Add to Favourite", Toast.LENGTH_SHORT).show()
-            //plantDetailsViewModel.addPlantToGarden()
+
+            /*
+            // TODO - Add to favourites using dummy data
+            // Dummy data
+            val dummyData = DummyLocalData.listOfCatBreeds[0]
+            // Simulate adding an item (replace with user input or other logic)
+            favoritesViewModel.add(
+                name = dummyData.name,
+                description = dummyData.description,
+                image = dummyData.image,
+                origin = dummyData.origin,
+                temperament = dummyData.temperament
+            )
+             */
+
         },
         shape = MaterialTheme.shapes.small,
         //modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -121,6 +142,7 @@ private fun CatBreedFavoriteButton(isFavorite: Boolean) {
         )
     }
 }
+
 
 // TODO - Create dimensions for padding
 @Composable

@@ -2,8 +2,7 @@ package com.swordcatbreedsapplication.feature.breed
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.swordcatbreedsapplication.api.CatApi
-import com.swordcatbreedsapplication.api.model.CatBreed
+import com.swordcatbreedsapplication.data.api.models.CatBreed
 import com.swordcatbreedsapplication.data.CatRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

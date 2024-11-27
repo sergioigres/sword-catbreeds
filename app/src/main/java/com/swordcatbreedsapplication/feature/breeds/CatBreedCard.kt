@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.swordcatbreedsapplication.api.model.CatBreed
+import com.swordcatbreedsapplication.data.api.models.CatBreed
 import com.swordcatbreedsapplication.ui.theme.CatBreedsTheme
 
 @Composable
@@ -32,8 +32,6 @@ fun CatBreedCard(cat: CatBreed, onClick: () -> Unit) {
         onClick = onClick,
         modifier = Modifier.padding(all = 8.dp)
     ) {
-        // TODO Is it necessary to use Row?
-        //Row {
         // Cat Details
         Column(
             modifier = Modifier
@@ -42,10 +40,8 @@ fun CatBreedCard(cat: CatBreed, onClick: () -> Unit) {
                 .fillMaxSize(),
         ) {
             // Cat Image
-
             AsyncImage(
-                // cat.Image?.url
-                model = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg",
+                model = cat.image?.url,
                 contentDescription = "Image of ${cat.name}, a ${cat.origin} cat",
                 modifier = Modifier
                     .size(92.dp)
@@ -73,22 +69,6 @@ fun CatBreedCard(cat: CatBreed, onClick: () -> Unit) {
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }
-        /*
-        // Space
-        Spacer(modifier = Modifier.width(8.dp))
-        // Cat Details
-        Column {
-            // Cat Image
-            AsyncImage(
-                model = cat.image,
-                contentDescription = "Cat image",
-            )
-            Text(text = "Name: ${cat.name}!", modifier = modifier)
-            Text(text = "Origin: ${cat.origin}!", modifier = modifier)
-        }
-        */
-
-        //}
     }
 }
 
@@ -101,6 +81,8 @@ fun ListOfCats(cats: List<CatBreed>, onClick: () -> Unit) {
     }
 }
 
+
+/*
 // Preview
 @Preview(name = "Light Mode")
 @Preview(
@@ -108,6 +90,7 @@ fun ListOfCats(cats: List<CatBreed>, onClick: () -> Unit) {
     showBackground = true,
     name = "Dark Mode"
 )
+
 
 @Preview
 @Composable
@@ -117,7 +100,7 @@ fun PreviewConversation() {
     }
 }
 
-/*
+
 @Preview(showBackground = true)
 @Composable
 fun CatCardPreview() {

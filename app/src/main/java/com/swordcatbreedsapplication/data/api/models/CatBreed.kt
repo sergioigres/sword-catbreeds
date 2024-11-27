@@ -1,4 +1,4 @@
-package com.swordcatbreedsapplication.api.model
+package com.swordcatbreedsapplication.data.api.models
 
 data class CatBreed(
     val adaptability: Int = Int.MIN_VALUE,
@@ -38,5 +38,5 @@ data class CatBreed(
     val vocalisation: Int = Int.MIN_VALUE,
     val weight: Weight? = null,
     val wikipedia_url: String = "",
-    val Image: Image? = null
+    val image: Image? = null
 )

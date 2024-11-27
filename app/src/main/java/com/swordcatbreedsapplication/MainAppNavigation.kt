@@ -26,9 +26,13 @@ sealed class Screen(
 @Composable
 fun MainAppNavigation() {
 
+    val activity = LocalContext.current as Activity
+
     val navController = rememberNavController()
 
-    val activity = LocalContext.current as Activity
+    var onBackClick = {
+        navController.popBackStack()
+    }
 
     var onCatBreedClick = {
         navController.navigate(Screen.CatBreed.route)
@@ -53,9 +57,21 @@ fun MainAppNavigation() {
             )
         }
         // Case details
-        composable(Screen.CatBreed.route) { BreedScreen("0", navController) }
+        composable(Screen.CatBreed.route) {
+            BreedScreen(
+                "0", // TODO Get from arguments
+                navController
+            )
+        }
         // Case favorites
-        composable(Screen.Favorites.route) { FavouritesScreen(navController) }
+        composable(Screen.Favorites.route) {
+            FavouritesScreen(
+                navController,
+                onCatBreedClick
+                // onBackClick // TODO Fix this
+            )
+        }
+
     }
 }
 
