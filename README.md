@@ -1,4 +1,4 @@
-# Sword Cat Breeds
+# The Cat API https://thecatapi.com/
 This repository contains the Android codebase for Cat Breeds app.
 
 ## Modularization
