@@ -45,13 +45,13 @@ const val SCREE_NAME = "Cat Breeds"
 fun CatBreedsScreen(
     navController: NavHostController,
     onCatBreedClick: () -> Unit,
-    onFavClick: () -> Unit,
+    onFavoritesClick: () -> Unit,
     onSearchClick: () -> Unit,
 ) {
     // Scaffold
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { SetupTopBar(title = SCREE_NAME, onFavClick, onSearchClick) },
+        topBar = { SetupTopBar(title = SCREE_NAME, onFavoritesClick, onSearchClick) },
         //bottomBar = { setBottomBar() },
         //floatingActionButton = { setFloatingActionButton() },
     ) { innerPadding ->
@@ -72,44 +72,21 @@ fun CatBreedsContent(
     modifier: Modifier,
     catBreedsViewModel: CatBreedsViewModel,
     onCatBreedClick: () -> Unit
-) {/*
-    // Observe cats StateFlow
-    val catBreeds by catBreedsViewModel.catBreeds.collectAsState()
-    // Fetch cat breeds when the screen is first displayed
-    LaunchedEffect(Unit) {
-        catBreedsViewModel.fetchCatBreeds()
-    }
-    // Use LazyColumn to display the list of cats
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        modifier = modifier,
-        //contentPadding = PaddingValues(16.dp)
-    ) {
-        items(catBreeds.size)
-        { index ->
-            CatBreedCard(
-                catBreeds[index],
-                onCatBreedClick
-            )
-        }
-    }
-     */
-
-
+) {
+    // UiState
     val uiState by catBreedsViewModel.catBreeds.collectAsState()
-
+    // Observe StateFlow
     Crossfade(targetState = uiState) { state ->
         when (uiState) {
+            is UiState.Empty -> EmptyView("No cat breeds found")
             is UiState.Loading -> LoadingView()
             is UiState.Success -> SuccessView(
                 catBreeds = (uiState as UiState.Success<List<CatBreed>>).data,
                 modifier = modifier,
                 onCatBreedClick = onCatBreedClick
             )
-            is UiState.Empty -> EmptyView("No cat breeds found")
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -172,6 +149,3 @@ fun EmptyView(text: String) {
         )
     }
 }
-
-
-

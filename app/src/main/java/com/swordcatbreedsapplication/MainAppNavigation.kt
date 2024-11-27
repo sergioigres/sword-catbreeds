@@ -1,11 +1,14 @@
 package com.swordcatbreedsapplication
 
 import android.app.Activity
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.app.ShareCompat
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavDeepLink
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -18,61 +21,77 @@ sealed class Screen(
     val arguments: List<NamedNavArgument> = emptyList(),
     val deepLinks: List<NavDeepLink> = emptyList(),
 ) {
-    object CatBreeds : Screen("catBreeds")
-    object CatBreed : Screen("catBreed")
+    object Home : Screen("catBreeds")
+    object CBDetail : Screen("catBreed")
     object Favorites : Screen("favorites")
+
 }
 
 @Composable
 fun MainAppNavigation() {
+    val navController = rememberNavController()
+    MainAppNavigationRoutes(
+        navController = navController
+    )
+}
+
+@Composable
+fun MainAppNavigationRoutes(navController: NavHostController) {
 
     val activity = LocalContext.current as Activity
 
-    val navController = rememberNavController()
-
-    var onBackClick = {
-        navController.popBackStack()
-    }
-
-    var onCatBreedClick = {
-        navController.navigate(Screen.CatBreed.route)
-    }
-
-    var onFavoritesClick = {
-        navController.navigate(Screen.Favorites.route)
-    }
-
-    var onSearchClick = {
-        Toast.makeText(activity, "Search clicked", Toast.LENGTH_SHORT).show()
-    }
-
-    NavHost(navController = navController, startDestination = Screen.CatBreeds.route) {
+    NavHost(navController = navController, startDestination = Screen.Home.route) {
         // Case home
-        composable(Screen.CatBreeds.route) {
+        composable(Screen.Home.route) {
             CatBreedsScreen(
                 navController,
-                onCatBreedClick,
-                onFavoritesClick,
-                onSearchClick
+                onCatBreedClick = {
+                    navController.navigate(Screen.CBDetail.route)
+                },
+                onFavoritesClick = {
+                    navController.navigate(Screen.Favorites.route)
+                },
+                onSearchClick = {
+                    Toast.makeText(activity, "Search clicked", Toast.LENGTH_SHORT).show()
+                }
             )
         }
         // Case details
-        composable(Screen.CatBreed.route) {
+        composable(Screen.CBDetail.route) {
             BreedScreen(
                 "0", // TODO Get from arguments
-                navController
+                navController,
+                onShareClick = {
+                    createShareIntent(activity, it.toString())
+                },
+                onBackClick = {
+                    navController.popBackStack()
+                }
             )
         }
         // Case favorites
         composable(Screen.Favorites.route) {
             FavouritesScreen(
                 navController,
-                onCatBreedClick
-                // onBackClick // TODO Fix this
+                onCatBreedClick = {
+                    navController.navigate(Screen.CBDetail.route)
+                },
+                onBackClick = {
+                    navController.popBackStack()
+                }
             )
         }
-
     }
 }
 
+// Helper for sharing
+private fun createShareIntent(activity: Activity, name: String) {
+    val shareText = "Checkout this cat breed: $name"
+    val shareIntent = ShareCompat.IntentBuilder(activity)
+        .setText(shareText)
+        .setType("text/plain")
+        .createChooserIntent()
+        .addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+    activity.startActivity(shareIntent)
+}
 

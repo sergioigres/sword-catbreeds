@@ -1,5 +1,6 @@
 package com.swordcatbreedsapplication.feature.breed
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.border
@@ -8,32 +9,38 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Button
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.swordcatbreedsapplication.data.api.CatApi
 import com.swordcatbreedsapplication.data.api.models.CatBreed
 import com.swordcatbreedsapplication.data.CatRepository
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
 
 
 // Create an instance of CatApi
@@ -45,11 +52,15 @@ val catRepository = CatRepository(catApi)
 // Create an instance of CatBreedsViewModel
 val catBreedViewModel = CatBreedViewModel(catRepository)
 
-
-const val SCREE_NAME = "Cat Breed"
-
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun BreedScreen(itemId: String, navController: NavHostController) {
+fun BreedScreen(
+    itemId: String,
+    navController: NavHostController,
+    onShareClick: () -> Unit,
+    onBackClick: () -> Unit
+) {
 
     val scrollState = rememberScrollState()
 
@@ -70,9 +81,61 @@ fun BreedScreen(itemId: String, navController: NavHostController) {
     LaunchedEffect(Unit) {
         catBreedViewModel.fetchCatBreed("abys")
     }
-    //
-    CatBreedDetails(
-        scrollState, catBreed, isFavorite = false
+
+    // Scaffold
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            SetupTopBar(
+                navController,
+                onShareClick,
+                onBackClick
+            )
+        },
+        floatingActionButton = {
+            CatBreedFavoriteButton(isFavorite = false)
+        }
+    ) { innerPadding ->
+        // Content
+        CatBreedDetails(
+            scrollState, catBreed, isFavorite = false
+        )
+    }
+
+
+}
+
+@ExperimentalMaterial3Api
+@Composable
+fun SetupTopBar(
+    navController: NavHostController,
+    onShareClick: () -> Unit,
+    onBackClick: () -> Unit
+) {
+
+    TopAppBar(
+        modifier = Modifier.statusBarsPadding(),
+        title = { },
+        navigationIcon = {
+            IconButton(
+                onClick = { onBackClick() }
+            ) {
+                Icon(
+                    Icons.Default.ArrowBack,
+                    contentDescription = "Back"
+                )
+            }
+        },
+        actions = {
+            IconButton(
+                onClick = { onShareClick() }
+            ) {
+                Icon(Icons.Default.Share, contentDescription = "Share")
+            }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.Transparent
+        )
     )
 }
 
@@ -85,10 +148,12 @@ private fun CatBreedDetails(
     //
     Box(Modifier.fillMaxSize()) {
         Column(Modifier.verticalScroll(scrollState)) {
-            // Image
-            CatBreedImage(catBreed)
-            // Favorite Button
-            CatBreedFavoriteButton(isFavorite)
+            Box(Modifier.fillMaxSize()) {
+                // Image
+                CatBreedImage(catBreed)
+                // Favorite Button
+                //CatBreedFavoriteButton(isFavorite)
+            }
             // Description
             CatBreedDescription(catBreed)
         }
@@ -100,14 +165,11 @@ private fun CatBreedDetails(
 private fun CatBreedImage(cat: CatBreed) {
     //
     AsyncImage(
-        // cat.Image?.url
-        model = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg",
+        model = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg", // TODO - Replace with cat.image.url
         contentDescription = "Image of ${cat.name}, a ${cat.origin} cat",
         modifier = Modifier
             .fillMaxSize()
-            //.clip(CircleShape)
             .border(1.5.dp, MaterialTheme.colorScheme.primary)
-        //.align(Alignment.CenterHorizontally)
     )
 }
 
@@ -115,10 +177,9 @@ private fun CatBreedImage(cat: CatBreed) {
 private fun CatBreedFavoriteButton(isFavorite: Boolean) {
     //val addContentDescription = stringResource(R.string.desc)
     val context = LocalContext.current
-    FloatingActionButton(
+    SmallFloatingActionButton(
         onClick = {
             Toast.makeText(context, "Add to Favourite", Toast.LENGTH_SHORT).show()
-
             /*
             // TODO - Add to favourites using dummy data
             // Dummy data
@@ -132,13 +193,11 @@ private fun CatBreedFavoriteButton(isFavorite: Boolean) {
                 temperament = dummyData.temperament
             )
              */
-
         },
-        shape = MaterialTheme.shapes.small,
-        //modifier = Modifier.align(Alignment.CenterHorizontally)
+        shape = CircleShape
     ) {
         Icon(
-            Icons.Filled.Add, contentDescription = null
+            Icons.Filled.Favorite, contentDescription = null
         )
     }
 }

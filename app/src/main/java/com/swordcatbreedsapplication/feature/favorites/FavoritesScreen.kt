@@ -10,14 +10,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -34,8 +30,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.swordcatbreedsapplication.data.FavoriteRepository
@@ -57,7 +51,7 @@ const val SCREE_NAME = "Favorites"
 fun FavouritesScreen(
     navController: NavHostController,
     onCatBreedClick: () -> Unit,
-    // onBackPressed: () -> Unit
+    onBackClick: () -> Unit
 ) {
 
     /*
@@ -82,7 +76,7 @@ fun FavouritesScreen(
             SetupTopBar(
                 title = SCREE_NAME,
                 navController,
-                // onBackPressed // TODO Fix this
+                onBackClick
             )
         },
     ) { innerPadding ->
@@ -158,13 +152,15 @@ Scaffold(
 fun SetupTopBar(
     title: String,
     navController: NavHostController,
-    // onBackClick: () -> Unit
+    onBackClick: () -> Unit
 ) {
 
     TopAppBar(title = { Text(text = title) },
         navigationIcon = {
             IconButton(
-                onClick = { navController.popBackStack() }
+                onClick = {
+                    onBackClick()
+                }
             ) {
                 Icon(
                     Icons.Default.ArrowBack,
