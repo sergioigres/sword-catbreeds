@@ -70,9 +70,6 @@ fun ListOfCats(cats: List<CatBreed>) {
     }
 }
 
-
-
-
 // Preview
 @Preview(name = "Light Mode")
 @Preview(

@@ -39,22 +39,4 @@ class CatBreedsViewModel(private val repository: CatRepository) : ViewModel() {
                 _catBreeds.value = UiState.Success(data)
         }
     }
-
-    /*
-    companion object {
-        val items: StateFlow<List<CatBreed>> = MutableStateFlow(CatApi.getCatBreeds())
-    }
-     */
-
-    /*
-    val items: StateFlow<List<CatBreed>> =
-        gardenPlantingRepository
-            .getPlantedGardens()
-            .stateIn(
-                viewModelScope,
-                SharingStarted.WhileSubscribed(5000),
-                emptyList()
-            )
-     */
-
 }

@@ -20,25 +20,4 @@ class CatRepository(private val catBreedsApi: CatApi) {
         return catBreedsApi.getCatBreed(breedId)
     }
 
-
-    /*
-   companion object {
-
-       private const val PAGE_SIZE = 25
-
-       // For Singleton instantiation
-       @Volatile private var instance: CatBreedsRepository? = null
-
-
-       fun getInstance(gardenPlantingDao: GardenPlantingDao) =
-           instance ?: synchronized(this) {
-               instance ?: CatBreedsRepository(gardenPlantingDao).also { instance = it }
-           }
-
-
-    }
-
-     */
-
-
 }

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-
+// TODO Integrate with Room database
 class FavoritesViewModel(private val repository: FavoriteRepository) : ViewModel() {
 
 

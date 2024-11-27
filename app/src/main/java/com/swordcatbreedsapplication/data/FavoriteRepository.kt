@@ -7,10 +7,12 @@ import com.swordcatbreedsapplication.data.local.CatBreedEntity
 import com.swordcatbreedsapplication.data.local.FavouriteDao
 import kotlinx.coroutines.flow.Flow
 
+
+// TODO Create repository with database interface
 //class FavoriteRepository(private val favouriteDao: FavouriteDao) {
 class FavoriteRepository() {
 
-    // Fetch cat breeds
+    // Fetch dummy cat breeds
     suspend fun fetchFavCatBreeds(): List<CatBreed> {
         return try {
             DummyLocalData.listOfCatBreeds.toDomainList()
@@ -54,6 +56,5 @@ class FavoriteRepository() {
             instance ?: FavoriteRepository(dao).also { instance = it }
         }
     }
-
      */
 }

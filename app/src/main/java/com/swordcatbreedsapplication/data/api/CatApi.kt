@@ -51,27 +51,5 @@ interface CatApi {
                 .build()
                 .create(CatApi::class.java)
         }
-
-
-        /*
-        // Dummy
-        fun getCatBreeds(): List<DummyCatBreed> {
-            return DummyLocalData.listOfCatBreeds
-        }
-
-        fun getCatBreed(id: Int): DummyCatBreed {
-            return DummyLocalData.listOfCatBreeds.get(id)
-        }
-
-         */
-
     }
 }
-
-/*
-class CatBreedRepository(private val catDao: CatDao) {
-
-    fun getCatBreeds(): Flow<List<CatBreed>> = catDao.getAllCats()
-}
-
- */

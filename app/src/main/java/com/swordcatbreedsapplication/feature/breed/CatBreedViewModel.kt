@@ -24,11 +24,4 @@ class CatBreedViewModel(private val repository: CatRepository) : ViewModel() {
             _catBreed.value = repository.fetchCatBreed(breedId)
         }
     }
-
-
-    /*
-    companion object {
-        val items: StateFlow<CatBreed> = MutableStateFlow(CatApi.getCatBreed(0))
-    }
-     */
 }

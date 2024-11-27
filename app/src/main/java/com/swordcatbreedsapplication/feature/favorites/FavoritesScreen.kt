@@ -89,62 +89,6 @@ fun FavouritesScreen(
         )
     }
 
-
-    /*
-
-
-    // Observe cats StateFlow
-    //val favorites = DummyLocalData.listOfCatBreeds
-    val favorites = emptyList<DummyCatBreed>()
-    // Validate if favorites is empty
-    if (favorites.isEmpty()) {
-        // Create empty screen view
-        Text("No favorites yet")
-    } else {
-        // Create list of favorites
-        Column(modifier = Modifier.fillMaxSize()) {
-            Text("Top Bar")
-            LazyColumn {
-                items(favorites.size) { index ->
-                    FavCard(favorites[index])
-                }
-            }
-        }
-    }
-
-     */
-
-
-    /*
-Scaffold(
-    //
-    topBar = {
-        TopAppBar(title = { Text("Favorite Cat Breeds") })
-    },
-    /*
-    //
-
-        ) {
-            Icon(Icons.Default.Favorite, contentDescription = "Add")
-        }
-    },
-     */
-    modifier = Modifier.fillMaxSize()
-) { innerPadding ->
-
-
-
-    //
-    LazyColumn {
-        items(favorites.size) { index ->
-            FavCard(favorites[index])
-        }
-    }
-
-
-    }
-
-     */
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

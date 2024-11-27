@@ -24,7 +24,6 @@ sealed class Screen(
     object Home : Screen("home")
     object Detail : Screen("detail/{name}/{imageUrl}")
     object Favorites : Screen("favorites")
-
 }
 
 @Composable
@@ -56,10 +55,10 @@ fun MainAppNavigationRoutes(navController: NavHostController) {
                 }
             )
         }
-        // Case details
+        // Case details // TODO Update routes to send and get arguments
         composable(Screen.Detail.route) {
             BreedScreen(
-                "0", // TODO Get from arguments
+                "0",
                 navController,
                 onShareClick = {
                     createShareIntent(activity, it.toString())

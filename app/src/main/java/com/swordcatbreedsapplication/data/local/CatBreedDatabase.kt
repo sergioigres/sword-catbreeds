@@ -7,12 +7,11 @@ import androidx.room.RoomDatabase
 
 const val DATABASE_NAME = "favorite_cat_breeds_db"
 
-// Create database
+// TODO Create database
 @Database(entities = [CatBreedEntity::class], version = 2)
 abstract class CatBreedDatabase : RoomDatabase() {
 
     abstract fun favouriteDao(): FavouriteDao
-
 
     // Create singleton
     companion object {
@@ -38,10 +37,5 @@ abstract class CatBreedDatabase : RoomDatabase() {
                 db
             }
         }
-
     }
-
-
-
-
 }
