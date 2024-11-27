@@ -3,7 +3,6 @@ This repository contains the Android codebase for Cat Breeds application.
 
 ## Description
 
-[Provide a brief and engaging description of your project. What does it do? What problem does it solve? What are its key features?]
 This application allows users to explore various cat breeds, learn about their characteristics, and save their favorites.
 It provides a user-friendly interface with detailed information and images for each breed.
 
@@ -17,8 +16,6 @@ It provides a user-friendly interface with detailed information and images for e
 * **Offline Support:** [WIP] Access breed information even without an internet connection.
 
 ## Screenshots
-
-[Include a few screenshots showcasing the main features of your app.]
 
 [<img alt="Screenshot 1" src="showcase/home.png" width="200px"/>](showcase/home.png)
 [<img alt="Screenshot 2" src="showcase/detail.png" width="200px"/>](showcase/detail.png)
@@ -36,20 +33,18 @@ It provides a user-friendly interface with detailed information and images for e
 * **Room:** [WIP] Persistence library for storing data locally.
 
 ## Modularization
+
 * **app:** The app module
 * **feature:** The ui layer for screens and features
 * **data:** The data layer for local and remote
 
 ## API
 
-[If your app uses an external API, provide details about the API and how to access it.]
-
 This app uses the [Cat API](https://thecatapi.com/) to fetch breed information and images. You will need to obtain an API key from the Cat API website and add it to the `local.properties` file in the project root directory.
 
 ## Todo List
 
-[If you welcome contributions, provide guidelines on how others can contribute to your project.]
-Bug fixes, new features, or improvements: 
+Bug fixing, new features and/or improvements to be done: 
 - Update routes to send arguments to Detail, currently has hardcoded Cat Breed id;
 - Search implementation, currently is just showing a toast;
 - Update compose previews, now aren't working
@@ -65,8 +60,6 @@ Bug fixes, new features, or improvements:
 - UI Testing
 
 ## License
-
-[Specify the license under which your project is distributed.]
 
 This project is licensed under the [MIT License](LICENSE).
 
