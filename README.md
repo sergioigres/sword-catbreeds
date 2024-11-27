@@ -2,17 +2,9 @@
 This repository contains the Android codebase for Cat Breeds app.
 
 ## Modularization
-Modules
-
-:app
-
-:feature:breeds
-:feature:breed
-:feature:favorites
-
-:data:api
-:data:local
-:data:dummy
+- :app
+- :feature: breeds | breed | favorites
+- :data: api | local | dummy
 
 ### UI Layer
 https://developer.android.com/develop/ui/compose/tutorial
@@ -21,3 +13,19 @@ https://developer.android.com/develop/ui/compose/tutorial
 ### Data Layer
 [**Local**](local/README.md)
 [**API**](api/README.md)
+
+### TODOS
+- Update routes to send and get arguments
+- Fix issues with Room
+- Update previews to start working again
+- Update Launch Screen
+- Favorite list from database
+- Favorite button in each list item
+- Search implementation
+- Hilt
+- Paging
+- Offline first approach
+- Error Handling
+- Revisit all libs
+- Unit Testing
+- UI Testing
