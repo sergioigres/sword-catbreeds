@@ -21,8 +21,8 @@ sealed class Screen(
     val arguments: List<NamedNavArgument> = emptyList(),
     val deepLinks: List<NavDeepLink> = emptyList(),
 ) {
-    object Home : Screen("catBreeds")
-    object CBDetail : Screen("catBreed")
+    object Home : Screen("home")
+    object Detail : Screen("detail/{name}/{imageUrl}")
     object Favorites : Screen("favorites")
 
 }
@@ -46,7 +46,7 @@ fun MainAppNavigationRoutes(navController: NavHostController) {
             CatBreedsScreen(
                 navController,
                 onCatBreedClick = {
-                    navController.navigate(Screen.CBDetail.route)
+                    navController.navigate(Screen.Detail.route)
                 },
                 onFavoritesClick = {
                     navController.navigate(Screen.Favorites.route)
@@ -57,7 +57,7 @@ fun MainAppNavigationRoutes(navController: NavHostController) {
             )
         }
         // Case details
-        composable(Screen.CBDetail.route) {
+        composable(Screen.Detail.route) {
             BreedScreen(
                 "0", // TODO Get from arguments
                 navController,
@@ -74,7 +74,7 @@ fun MainAppNavigationRoutes(navController: NavHostController) {
             FavouritesScreen(
                 navController,
                 onCatBreedClick = {
-                    navController.navigate(Screen.CBDetail.route)
+                    navController.navigate(Screen.Detail.route)
                 },
                 onBackClick = {
                     navController.popBackStack()
