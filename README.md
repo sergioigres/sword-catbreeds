@@ -20,9 +20,9 @@ It provides a user-friendly interface with detailed information and images for e
 
 [Include a few screenshots showcasing the main features of your app.]
 
-[![Screenshot 1](showcase/home.png)](showcase/home.png)
-[![Screenshot 2](showcase/detail.png)](showcase/detail.png)
-[![Screenshot 3](showcase/favorites.png)](showcase/favorites.png)
+[<img alt="Screenshot 1" src="showcase/home.png" width="200px"/>](showcase/home.png)
+[<img alt="Screenshot 2" src="showcase/detail.png" width="200px"/>](showcase/detail.png)
+[<img alt="Screenshot 3" src="showcase/favorites.png" width="200px"/>](showcase/favorites.png)
 
 ## Technologies Used
 
